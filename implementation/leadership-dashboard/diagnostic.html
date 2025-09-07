@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .test-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .test-button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard Diagnostic Page</h1>
+        <p>This page will help diagnose issues with the Leadership Dashboard application.</p>
+
+        <h2>Browser Information</h2>
+        <pre id="browserInfo">Loading...</pre>
+
+        <h2>Application Status</h2>
+        <pre id="appStatus">Loading...</pre>
+
+        <button class="test-button" id="testBtn">Test Angular Connection</button>
+        <pre id="testResult"></pre>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display browser information
+            const browserInfoEl = document.getElementById('browserInfo');
+            browserInfoEl.textContent = `
+User Agent: ${navigator.userAgent}
+Platform: ${navigator.platform}
+Languages: ${navigator.languages}
+            `;
+
+            // Check application status
+            const appStatusEl = document.getElementById('appStatus');
+            try {
+                fetch('http://localhost:4200/')
+                    .then(response => {
+                        appStatusEl.textContent = `
+Server Status: Running
+Response Status: ${response.status} ${response.statusText}
+                        `;
+                    })
+                    .catch(error => {
+                        appStatusEl.textContent = `
+Server Status: Error
+Error Details: ${error.message}
+                        `;
+                    });
+            } catch (error) {
+                appStatusEl.textContent = `
+Server Status: Error
+Error Details: ${error.message}
+                `;
+            }
+
+            // Test button
+            document.getElementById('testBtn').addEventListener('click', function() {
+                const testResultEl = document.getElementById('testResult');
+                testResultEl.textContent = 'Testing connection to Angular app...';
+                
+                try {
+                    fetch('http://localhost:4200/dashboard')
+                        .then(response => response.text())
+                        .then(html => {
+                            testResultEl.textContent = `
+Response received! 
+Length: ${html.length} characters
+First 100 characters: ${html.substring(0, 100)}...
+                            `;
+                        })
+                        .catch(error => {
+                            testResultEl.textContent = `Error: ${error.message}`;
+                        });
+                } catch (error) {
+                    testResultEl.textContent = `Error: ${error.message}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
