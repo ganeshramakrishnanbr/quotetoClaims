@@ -1,0 +1,187 @@
+<div class="dashboard-container" [class.presentation-mode]="presentationMode">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Leadership Dashboard</h1>
+    <div class="dashboard-actions">
+      <button mat-raised-button color="primary" (click)="refreshData()">
+        <mat-icon>refresh</mat-icon>
+        Refresh Data
+      </button>
+      <button mat-raised-button color="accent" (click)="exportData()">
+        <mat-icon>download</mat-icon>
+        Export
+      </button>
+      <button mat-raised-button [color]="presentationMode ? 'warn' : 'basic'" (click)="togglePresentationMode()">
+        <mat-icon>{{ presentationMode ? 'close_fullscreen' : 'present_to_all' }}</mat-icon>
+        {{ presentationMode ? 'Exit Presentation' : 'Presentation Mode' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="dashboard-nav">
+    <mat-tab-group animationDuration="300ms" (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Executive Overview">
+        <a [routerLink]="['/dashboard/executive']" routerLinkActive="active">Executive Overview</a>
+      </mat-tab>
+      <mat-tab label="Sales Performance">
+        <a [routerLink]="['/dashboard/sales']" routerLinkActive="active">Sales Performance</a>
+      </mat-tab>
+      <mat-tab label="Claims Processing">
+        <a [routerLink]="['/dashboard/claims']" routerLinkActive="active">Claims Processing</a>
+      </mat-tab>
+      <mat-tab label="Customer Insights">
+        <a [routerLink]="['/dashboard/customers']" routerLinkActive="active">Customer Insights</a>
+      </mat-tab>
+      <mat-tab label="Risk Portfolio">
+        <a [routerLink]="['/dashboard/risk']" routerLinkActive="active">Risk Portfolio</a>
+      </mat-tab>
+    </mat-tab-group>
+  </nav>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+          <p>Loading KPIs...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Performance Charts Section -->
+  <section class="dashboard-section">
+    <h2 class="section-title">Performance Trends</h2>
+    <div class="section-content">
+      <div class="chart-container performance-chart">
+        <ngx-charts-line-chart
+          *ngIf="!loading.performance"
+          [results]="[
+            { name: 'Quotes', series: performanceData.map(d => ({ name: d.month, value: d.quotes })) },
+            { name: 'Applications', series: performanceData.map(d => ({ name: d.month, value: d.applications })) },
+            { name: 'Policies', series: performanceData.map(d => ({ name: d.month, value: d.policies })) }
+          ]"
+          [legend]="performanceChartConfig.showLegend"
+          [showXAxisLabel]="performanceChartConfig.showXAxisLabel"
+          [showYAxisLabel]="performanceChartConfig.showYAxisLabel"
+          [xAxis]="performanceChartConfig.showXAxis"
+          [yAxis]="performanceChartConfig.showYAxis"
+          [xAxisLabel]="performanceChartConfig.xAxisLabel"
+          [yAxisLabel]="performanceChartConfig.yAxisLabel"
+          [scheme]="performanceChartConfig.colorScheme"
+          [animations]="performanceChartConfig.animations"
+          [gradient]="true"
+          [curve]="curve"
+        ></ngx-charts-line-chart>
+        
+        <!-- Loading Placeholder -->
+        <div class="loading-container" *ngIf="loading.performance">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading performance data...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Mix Section -->
+  <section class="dashboard-section">
+    <h2 class="section-title">Product Mix</h2>
+    <div class="section-content">
+      <div class="chart-container product-mix-chart">
+        <ngx-charts-advanced-pie-chart
+          *ngIf="!loading.productMix"
+          [results]="productMixData"
+          [animations]="true"
+          [gradient]="true"
+        ></ngx-charts-advanced-pie-chart>
+        
+        <!-- Loading Placeholder -->
+        <div class="loading-container" *ngIf="loading.productMix">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading product mix data...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Claims Section -->
+  <section class="dashboard-section">
+    <h2 class="section-title">Claims Processing</h2>
+    <div class="section-content">
+      <div class="chart-container claims-chart">
+        <ngx-charts-pie-chart
+          *ngIf="!loading.claims"
+          [results]="claimsData?.status"
+          [labels]="true"
+          [doughnut]="true"
+          [animations]="true"
+          [gradient]="true"
+        ></ngx-charts-pie-chart>
+        
+        <!-- Loading Placeholder -->
+        <div class="loading-container" *ngIf="loading.claims">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading claims data...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Insights Section -->
+  <section class="dashboard-section">
+    <h2 class="section-title">Customer Insights</h2>
+    <div class="section-content">
+      <div class="chart-container customer-chart">
+        <ngx-charts-bar-horizontal
+          *ngIf="!loading.customers"
+          [results]="customerSegments"
+          [xAxis]="true"
+          [yAxis]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Count'"
+          [yAxisLabel]="'Segment'"
+          [animations]="true"
+          [gradient]="true"
+        ></ngx-charts-bar-horizontal>
+        
+        <!-- Loading Placeholder -->
+        <div class="loading-container" *ngIf="loading.customers">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading customer data...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Risk Portfolio Section -->
+  <section class="dashboard-section">
+    <h2 class="section-title">Risk Portfolio</h2>
+    <div class="section-content">
+      <div class="chart-container risk-chart">
+        <ngx-charts-bar-vertical-2d
+          *ngIf="!loading.risk"
+          [results]="[
+            { name: 'Exposure', series: riskPortfolio.map(d => ({ name: d.risk, value: d.exposure })) },
+            { name: 'Returns', series: riskPortfolio.map(d => ({ name: d.risk, value: d.returns })) }
+          ]"
+          [gradient]="true"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Risk Category'"
+          [yAxisLabel]="'Percentage'"
+          [animations]="true"
+        ></ngx-charts-bar-vertical-2d>
+        
+        <!-- Loading Placeholder -->
+        <div class="loading-container" *ngIf="loading.risk">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading risk portfolio data...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

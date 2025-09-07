@@ -1,0 +1,65 @@
+<div class="chart-container">
+  <div class="chart-header" *ngIf="title || subtitle">
+    <h3 class="chart-title" *ngIf="title">{{ title }}</h3>
+    <p class="chart-subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+  </div>
+  
+  <div class="chart-content">
+    <ng-container [ngSwitch]="chartType">
+      <!-- Pie Chart -->
+      <ngx-charts-pie-chart
+        *ngSwitchCase="'pie'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        [legendPosition]="'below'"
+        [labels]="showLabels"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-pie-chart>
+      
+      <!-- Advanced Pie Chart -->
+      <ngx-charts-advanced-pie-chart
+        *ngSwitchCase="'advanced-pie'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-advanced-pie-chart>
+      
+      <!-- Tree Map -->
+      <ngx-charts-tree-map
+        *ngSwitchCase="'tree-map'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [animations]="animations"
+        [labelFormatting]="(node) => node.name + ': ' + node.value"
+        (select)="onSelect($event)">
+      </ngx-charts-tree-map>
+      
+      <!-- Bubble Chart -->
+      <ngx-charts-bubble-chart
+        *ngSwitchCase="'bubble-chart'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Loyalty'"
+        [yAxisLabel]="'Value'"
+        [xScaleMin]="0"
+        [xScaleMax]="100"
+        [yScaleMin]="0"
+        [yScaleMax]="100"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-bubble-chart>
+    </ng-container>
+  </div>
+</div>

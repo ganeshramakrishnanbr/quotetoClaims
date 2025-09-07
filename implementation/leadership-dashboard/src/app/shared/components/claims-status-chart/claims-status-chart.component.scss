@@ -1,0 +1,80 @@
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  
+  .chart-header {
+    margin-bottom: 16px;
+    
+    .chart-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 0 4px 0;
+      color: #333;
+    }
+    
+    .chart-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+  }
+  
+  .chart-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    
+    ::ng-deep {
+      .ngx-charts {
+        float: none;
+        
+        .grid-panel.odd {
+          fill: rgba(0, 0, 0, 0.01);
+        }
+        
+        .tick text {
+          font-size: 12px;
+        }
+        
+        .bar {
+          cursor: pointer;
+          transition: opacity 0.2s;
+          
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Status color classes
+.status-approved {
+  color: #5AA454;
+}
+
+.status-pending {
+  color: #C7B42C;
+}
+
+.status-rejected {
+  color: #A10A28;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .chart-container {
+    .chart-content {
+      ::ng-deep {
+        .ngx-charts {
+          .tick text {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}

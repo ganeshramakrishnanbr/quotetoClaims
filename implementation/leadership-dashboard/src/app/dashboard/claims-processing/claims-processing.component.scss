@@ -1,0 +1,101 @@
+.claims-processing-container {
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+
+    .dashboard-card {
+      mat-card {
+        height: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        
+        mat-card-header {
+          padding: 16px 16px 0;
+          
+          mat-card-title {
+            font-size: 18px;
+            font-weight: 500;
+          }
+          
+          mat-card-subtitle {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+          }
+        }
+        
+        mat-card-content {
+          padding: 16px;
+          display: flex;
+          justify-content: center;
+          min-height: 400px;
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .view {
+    width: 100% !important;
+    height: 300px !important;
+  }
+}
+
+// Custom colors for claims status
+.status-approved {
+  color: #5AA454;
+}
+
+.status-rejected {
+  color: #A10A28;
+}
+
+.status-pending {
+  color: #C7B42C;
+}
+
+// Animation for data updates
+.data-update {
+  animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

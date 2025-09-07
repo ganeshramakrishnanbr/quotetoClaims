@@ -1,0 +1,76 @@
+<div class="chart-container">
+  <div class="chart-header" *ngIf="title || subtitle">
+    <h3 class="chart-title" *ngIf="title">{{ title }}</h3>
+    <p class="chart-subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+  </div>
+  
+  <div class="chart-content">
+    <ng-container [ngSwitch]="chartType">
+      <!-- Heat Map -->
+      <ngx-charts-heat-map
+        *ngSwitchCase="'heat-map'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="showLegend"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-heat-map>
+      
+      <!-- Tree Map -->
+      <ngx-charts-tree-map
+        *ngSwitchCase="'tree-map'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [animations]="animations"
+        [labelFormatting]="(node) => node.name + ': ' + node.value"
+        (select)="onSelect($event)">
+      </ngx-charts-tree-map>
+      
+      <!-- Bar Vertical -->
+      <ngx-charts-bar-vertical
+        *ngSwitchCase="'bar-vertical'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="showLegend"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+      
+      <!-- Bar Horizontal 2D -->
+      <ngx-charts-bar-horizontal-2d
+        *ngSwitchCase="'bar-horizontal-2d'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="showLegend"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="yAxisLabel"
+        [yAxisLabel]="xAxisLabel"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-horizontal-2d>
+    </ng-container>
+  </div>
+</div>

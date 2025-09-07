@@ -1,0 +1,16 @@
+<div class="kpi-card" [ngClass]="kpi.color">
+  <div class="kpi-header">
+    <h3 class="kpi-title">{{ kpi.title }}</h3>
+    <mat-icon class="kpi-icon">{{ kpi.icon }}</mat-icon>
+  </div>
+  <div class="kpi-content">
+    <p class="kpi-value">{{ kpi.value }}</p>
+    <div class="kpi-trend" [ngClass]="getTrendClass()">
+      <mat-icon class="trend-icon">{{ getTrendIcon() }}</mat-icon>
+      <span class="trend-value">{{ kpi.change }}</span>
+    </div>
+  </div>
+  <div class="kpi-footer" *ngIf="kpi.description">
+    <p class="kpi-description">{{ kpi.description }}</p>
+  </div>
+</div>

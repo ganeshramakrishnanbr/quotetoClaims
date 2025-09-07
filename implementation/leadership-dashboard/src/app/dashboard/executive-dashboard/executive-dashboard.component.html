@@ -1,0 +1,109 @@
+<div class="executive-dashboard fade-in">
+  <h1 class="dashboard-title">Executive Dashboard</h1>
+  
+  <!-- Loading Indicator -->
+  <div class="loading-container" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading dashboard data...</p>
+  </div>
+  
+  <!-- KPI Cards Section -->
+  <div class="kpi-cards-container" *ngIf="!loading">
+    <div class="kpi-row">
+      <app-kpi-card 
+        *ngFor="let kpi of kpiData.slice(0, 4)"
+        [title]="kpi.title"
+        [value]="kpi.value"
+        [change]="kpi.change"
+        [icon]="kpi.icon"
+        [colorClass]="kpi.color">
+      </app-kpi-card>
+    </div>
+  </div>
+  
+  <!-- Main Dashboard Content -->
+  <div class="dashboard-content" *ngIf="!loading">
+    <!-- Performance Trends Section -->
+    <div class="dashboard-section performance-section">
+      <h2 class="section-title">Performance Trends</h2>
+      <div class="chart-container">
+        <ngx-charts-line-chart
+          [view]="performanceChartOptions.view"
+          [scheme]="performanceChartOptions.scheme"
+          [results]="performanceData"
+          [gradient]="performanceChartOptions.gradient"
+          [xAxis]="performanceChartOptions.showXAxis"
+          [yAxis]="performanceChartOptions.showYAxis"
+          [legend]="performanceChartOptions.showLegend"
+          [showXAxisLabel]="performanceChartOptions.showXAxisLabel"
+          [showYAxisLabel]="performanceChartOptions.showYAxisLabel"
+          [xAxisLabel]="performanceChartOptions.xAxisLabel"
+          [yAxisLabel]="performanceChartOptions.yAxisLabel"
+          [autoScale]="performanceChartOptions.autoScale"
+          [timeline]="performanceChartOptions.timeline"
+          [curve]="performanceChartOptions.curve">
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+    
+    <!-- Business Metrics Section -->
+    <div class="dashboard-section metrics-section">
+      <h2 class="section-title">Business Metrics</h2>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-title">Total Revenue</div>
+          <div class="metric-value">{{ formatCurrency(realTimeData?.revenue || 0) }}</div>
+          <div class="metric-change positive">+12.5% YTD</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-title">Quotes Generated</div>
+          <div class="metric-value">{{ formatLargeNumber(realTimeData?.quotesGenerated || 0) }}</div>
+          <div class="metric-change positive">+18.7% QoQ</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-title">Applications Submitted</div>
+          <div class="metric-value">{{ formatLargeNumber(realTimeData?.applicationsSubmitted || 0) }}</div>
+          <div class="metric-change positive">+14.2% QoQ</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-title">Policies Issued</div>
+          <div class="metric-value">{{ formatLargeNumber(realTimeData?.policiesIssued || 0) }}</div>
+          <div class="metric-change positive">+9.8% QoQ</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-title">Conversion Rate</div>
+          <div class="metric-value">{{ formatPercentage((realTimeData?.policiesIssued / realTimeData?.quotesGenerated) * 100 || 0) }}</div>
+          <div class="metric-change positive">+2.5% QoQ</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-title">Active Users</div>
+          <div class="metric-value">{{ formatLargeNumber(realTimeData?.activeUsers || 0) }}</div>
+          <div class="metric-change positive">+15.3% YTD</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Mix Section -->
+    <div class="dashboard-section product-mix-section">
+      <h2 class="section-title">Product Mix</h2>
+      <div class="chart-container">
+        <ngx-charts-pie-chart
+          [view]="[400, 300]"
+          [scheme]="{ domain: productMixData.map(item => item.color) }"
+          [results]="productMixData"
+          [gradient]="true"
+          [legend]="true"
+          [legendPosition]="'right'"
+          [labels]="true"
+          [doughnut]="true"
+          [arcWidth]="0.5">
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+  </div>
+</div>

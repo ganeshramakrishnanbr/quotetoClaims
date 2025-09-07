@@ -1,0 +1,68 @@
+// Colors
+$primary-color: #3B82F6; // Blue
+$secondary-color: #10B981; // Green
+$accent-color: #F59E0B; // Amber
+$danger-color: #EF4444; // Red
+$purple-color: #8B5CF6; // Purple
+
+$light-background: #F9FAFB;
+$dark-background: #1F2937;
+$light-card-background: #FFFFFF;
+$dark-card-background: #374151;
+
+$primary-text: #1F2937;
+$secondary-text: #6B7280;
+$light-text: #F9FAFB;
+$dark-text: #111827;
+
+$border-color: #E5E7EB;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Typography
+$font-family-base: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-xxl: 3rem;
+
+// Animations
+$transition-speed-fast: 150ms;
+$transition-speed-normal: 300ms;
+$transition-speed-slow: 500ms;
+$transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Borders
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 1rem;
+$border-width: 1px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;

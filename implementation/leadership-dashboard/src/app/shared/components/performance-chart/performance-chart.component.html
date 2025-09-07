@@ -1,0 +1,25 @@
+<div class="chart-container">
+  <div class="chart-header" *ngIf="title || subtitle">
+    <h3 class="chart-title" *ngIf="title">{{ title }}</h3>
+    <p class="chart-subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+  </div>
+  
+  <div class="chart-content">
+    <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="scheme"
+      [results]="data"
+      [gradient]="gradient"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="showLegend"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [animations]="animations"
+      [yAxisTickFormatting]="yAxisTickFormatting"
+      (select)="onSelect($event)">
+    </ngx-charts-line-chart>
+  </div>
+</div>

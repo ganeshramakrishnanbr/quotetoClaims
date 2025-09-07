@@ -1,0 +1,111 @@
+<div class="risk-portfolio-container" [@pageTransition]>
+  <div class="dashboard-header">
+    <h2>Risk Portfolio Dashboard</h2>
+    <div class="dashboard-actions">
+      <button mat-icon-button (click)="onRefresh()" aria-label="Refresh data">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Risk Exposure Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Risk Exposure</mat-card-title>
+          <mat-card-subtitle>Total exposure by business line (in millions)</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-bar-vertical
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="riskExposureData"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Business Line"
+            yAxisLabel="Exposure ($M)"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Loss Ratio Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Loss Ratio</mat-card-title>
+          <mat-card-subtitle>Loss ratio trends by quarter</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="lossRatioData"
+            [gradient]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Quarter"
+            yAxisLabel="Loss Ratio (%)"
+            (select)="onSelect($event)">
+          </ngx-charts-line-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Reserve Adequacy Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Reserve Adequacy</mat-card-title>
+          <mat-card-subtitle>Actual vs expected reserves by business line</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-bar-horizontal-2d
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="reserveAdequacyData"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Reserves ($M)"
+            yAxisLabel="Business Line"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-horizontal-2d>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Risk Category Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Risk Categories</mat-card-title>
+          <mat-card-subtitle>Distribution of risks by category</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-tree-map
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="riskCategoryData"
+            [gradient]="false"
+            [animations]="true"
+            [labelFormatting]="(node) => node.name + ': ' + node.value"
+            (select)="onSelect($event)">
+          </ngx-charts-tree-map>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

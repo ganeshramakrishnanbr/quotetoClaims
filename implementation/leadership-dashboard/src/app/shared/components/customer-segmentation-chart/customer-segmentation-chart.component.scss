@@ -1,0 +1,102 @@
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  
+  .chart-header {
+    margin-bottom: 16px;
+    
+    .chart-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 0 4px 0;
+      color: #333;
+    }
+    
+    .chart-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+  }
+  
+  .chart-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    
+    ::ng-deep {
+      .ngx-charts {
+        float: none;
+        
+        .advanced-pie-legend {
+          .legend-items-container {
+            margin-top: 10px;
+            
+            .legend-items {
+              overflow: visible !important;
+              
+              .legend-item {
+                cursor: pointer;
+                
+                &:hover {
+                  color: #000;
+                }
+              }
+            }
+          }
+        }
+        
+        .bubble-chart-circle {
+          cursor: pointer;
+          opacity: 0.8;
+          transition: opacity 0.2s;
+          
+          &:hover {
+            opacity: 1;
+          }
+        }
+        
+        .tree-map-cell {
+          cursor: pointer;
+          transition: opacity 0.2s;
+          
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Segment color classes
+.segment-high-value {
+  color: #5AA454;
+}
+
+.segment-medium-value {
+  color: #C7B42C;
+}
+
+.segment-low-value {
+  color: #A10A28;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .chart-container {
+    .chart-content {
+      ::ng-deep {
+        .ngx-charts {
+          .advanced-pie-legend {
+            .legend-items-container {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

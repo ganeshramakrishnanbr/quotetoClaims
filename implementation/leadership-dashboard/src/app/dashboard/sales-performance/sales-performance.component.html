@@ -1,0 +1,113 @@
+<div class="sales-performance-container" [@pageTransition]>
+  <div class="dashboard-header">
+    <h2>Sales Performance Dashboard</h2>
+    <div class="dashboard-actions">
+      <button mat-icon-button (click)="onRefresh()" aria-label="Refresh data">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Sales Trend Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Sales Trend</mat-card-title>
+          <mat-card-subtitle>Monthly sales performance</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="salesTrendData"
+            [gradient]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Month"
+            yAxisLabel="Sales ($)"
+            (select)="onSelect($event)">
+          </ngx-charts-line-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Channel Performance Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Channel Performance</mat-card-title>
+          <mat-card-subtitle>Sales by distribution channel</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-pie-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="channelPerformanceData"
+            [gradient]="true"
+            [legend]="true"
+            [legendPosition]="'below'"
+            [labels]="true"
+            [doughnut]="false"
+            (select)="onSelect($event)">
+          </ngx-charts-pie-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Product Performance Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Product Performance</mat-card-title>
+          <mat-card-subtitle>Top selling products by revenue</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-bar-vertical
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="productPerformanceData"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Product"
+            yAxisLabel="Revenue ($)"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Regional Sales Map -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Regional Sales</mat-card-title>
+          <mat-card-subtitle>Sales performance by region</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-bar-horizontal
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="regionalSalesData"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Sales ($)"
+            yAxisLabel="Region"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-horizontal>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

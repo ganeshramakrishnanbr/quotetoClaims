@@ -1,0 +1,109 @@
+<div class="claims-processing-container" [@pageTransition]>
+  <div class="dashboard-header">
+    <h2>Claims Processing Dashboard</h2>
+    <div class="dashboard-actions">
+      <button mat-icon-button (click)="onRefresh()" aria-label="Refresh data">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Claims Volume Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Claims Volume</mat-card-title>
+          <mat-card-subtitle>Monthly claims submission trends</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="claimsVolumeData"
+            [gradient]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Month"
+            yAxisLabel="Number of Claims"
+            (select)="onSelect($event)">
+          </ngx-charts-line-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Processing Time Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Processing Time</mat-card-title>
+          <mat-card-subtitle>Average time to process claims (days)</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-bar-vertical
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="processingTimeData"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Claim Type"
+            yAxisLabel="Days"
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Approval Rates Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Approval Rates</mat-card-title>
+          <mat-card-subtitle>Percentage of claims approved by type</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-gauge
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="approvalRatesData"
+            [min]="0"
+            [max]="100"
+            [units]="'%'"
+            [showAxis]="true"
+            (select)="onSelect($event)">
+          </ngx-charts-gauge>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Claim Type Distribution Chart -->
+    <div class="dashboard-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Claim Type Distribution</mat-card-title>
+          <mat-card-subtitle>Distribution of claims by category</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ngx-charts-pie-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="claimTypeDistributionData"
+            [gradient]="true"
+            [legend]="true"
+            [legendPosition]="'below'"
+            [labels]="true"
+            [doughnut]="false"
+            (select)="onSelect($event)">
+          </ngx-charts-pie-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

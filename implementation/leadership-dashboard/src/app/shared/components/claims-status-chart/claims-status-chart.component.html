@@ -1,0 +1,82 @@
+<div class="chart-container">
+  <div class="chart-header" *ngIf="title || subtitle">
+    <h3 class="chart-title" *ngIf="title">{{ title }}</h3>
+    <p class="chart-subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+  </div>
+  
+  <div class="chart-content">
+    <ng-container [ngSwitch]="chartType">
+      <!-- Vertical Bar Chart -->
+      <ngx-charts-bar-vertical
+        *ngSwitchCase="'vertical-bar'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="showLegend"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+      
+      <!-- Horizontal Bar Chart -->
+      <ngx-charts-bar-horizontal
+        *ngSwitchCase="'horizontal-bar'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="showLegend"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="yAxisLabel"
+        [yAxisLabel]="xAxisLabel"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-horizontal>
+      
+      <!-- Stacked Vertical Bar Chart -->
+      <ngx-charts-bar-vertical-stacked
+        *ngSwitchCase="'stacked-vertical-bar'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="showLegend"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical-stacked>
+      
+      <!-- Stacked Horizontal Bar Chart -->
+      <ngx-charts-bar-horizontal-stacked
+        *ngSwitchCase="'stacked-horizontal-bar'"
+        [view]="view"
+        [scheme]="scheme"
+        [results]="data"
+        [gradient]="gradient"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="showLegend"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="yAxisLabel"
+        [yAxisLabel]="xAxisLabel"
+        [animations]="animations"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-horizontal-stacked>
+    </ng-container>
+  </div>
+</div>
